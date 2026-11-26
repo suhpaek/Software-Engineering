@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Smart Campus Room Availability Checker</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    background: Canvas;
+    color: CanvasText;
+  }
+  h1 { font-size: 1.25rem; }
+  .meta { color: #666; font-size: 0.85rem; margin-bottom: 1.5rem; }
+  label { display: block; margin-top: 1rem; font-weight: 600; font-size: 0.9rem; }
+  input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    border-radius: 6px;
+  }
+  button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+  }
+  button:active { opacity: 0.85; }
+  #result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: none;
+  }
+  #result.available { background: #dcfce7; color: #14532d; display: block; }
+  #result.unavailable { background: #fee2e2; color: #7f1d1d; display: block; }
+  .reason-code { font-family: monospace; opacity: 0.75; font-size: 0.8rem; }
+  @media (max-width: 420px) {
+    body { margin: 1rem auto; }
+  }
+</style>
+</head>
+<body>
+  <h1>Smart Campus Room Availability Checker — Room A1.204</h1>
+  <p class="meta">
+    Fictional room, fixed sample bookings only. No real personal data, login
+    or payment. Reference "now": 2026-11-26 12:00.
+  </p>
+
+  <form id="checkForm">
+    <label for="startTime">Start time</label>
+    <input type="datetime-local" id="startTime" value="2026-11-27T11:00" required />
+
+    <label for="duration">Duration (minutes, 1–120)</label>
+    <input type="number" id="duration" value="30" min="1" max="120" required />
+
+    <button type="submit">Check availability</button>
+  </form>
+
+  <div id="result" role="status" aria-live="polite"></div>
+
+  <script type="module">
+    import { checkAvailability } from "./engine.mjs";
+
+    const form = document.getElementById("checkForm");
+    const resultBox = document.getElementById("result");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const startTime = document.getElementById("startTime").value;
+      const durationMinutes = Number(document.getElementById("duration").value);
+
+      const result = checkAvailability({ startTime, durationMinutes });
+
+      resultBox.className = result.available ? "available" : "unavailable";
+      resultBox.innerHTML = `
+        <strong>${result.available ? "Available" : "Unavailable"}</strong><br/>
+        ${result.message}<br/>
+        <span class="reason-code">reasonCode: ${result.reasonCode}</span>
+      `;
+    });
+  </script>
+</body>
+</html>

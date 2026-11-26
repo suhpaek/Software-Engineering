@@ -1,0 +1,20 @@
+Smart Campus Checker — code-based engine — test results
+
+T1 [PASS] valid free interval -> Available
+      expected: true / OK  |  observed: true / OK
+T2 [PASS] overlap with an existing booking -> Unavailable
+      expected: false / OVERLAP  |  observed: false / OVERLAP
+T3 [PASS] blocked room -> Unavailable
+      expected: false / BLOCKED  |  observed: false / BLOCKED
+T4 [PASS] duration = 0 -> validation error
+      expected: false / BAD_DURATION  |  observed: false / BAD_DURATION
+T5 [PASS] duration = 121 minutes -> validation error
+      expected: false / BAD_DURATION  |  observed: false / BAD_DURATION
+T6 [PASS] past start time -> validation error
+      expected: false / PAST_START  |  observed: false / PAST_START
+T7 [PASS] adjacent non-overlapping interval -> Available
+      expected: true / OK  |  observed: true / OK
+T8 [PASS] booking data unchanged after checks
+      expected: bookings deep-equal before/after  |  observed: unchanged
+
+8/8 passed
