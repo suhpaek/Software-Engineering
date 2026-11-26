@@ -8,6 +8,7 @@
 **Code-based environment:** existing Bolt.new project (`sb1-qh27vnky`), a React + TypeScript + Vite app with Vitest, published at `https://smart-campus-room-av-en75.bolt.host`.
 **Low-code environment:** Appsmith (`kazakh-british-technical-university1.appsmith.com`, app "My first application").
 **AI assistant:** Claude Sonnet 5, inside Claude Code, this session.
+**Repository:** https://github.com/suhpaek/Software-Engineering/tree/main/practice-12-smart-campus
 
 ---
 

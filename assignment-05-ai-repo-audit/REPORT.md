@@ -6,6 +6,7 @@
 **Group / Time:** Thursday 14:00–17:00
 **Repository:** `expense-tracker` — a small single-user command-line expense
 tracker (Python 3, stdlib + pytest/flake8/bandit for dev tooling).
+**Pushed to:** https://github.com/suhpaek/Software-Engineering/tree/main/assignment-05-ai-repo-audit
 
 ---
 
